@@ -5,7 +5,10 @@ const userSchema = mongoose.Schema(
     name: { type: String },
     bio: { type: String },
     email: { type: String, required: true, unique: true },
-    avatar: { type: String },
+    avatar: {
+      type: String,
+      default: "https://cdn-icons-png.flaticon.com/512/4322/4322991.png",
+    },
     password: { type: String, required: true },
     role: {
       type: String,

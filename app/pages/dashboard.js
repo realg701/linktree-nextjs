@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import MyHead from "@/components/MyHead";
 import LinkBox from "@/components/LinkBox";
+import Header from "@/components/Header";
 
 const dashboard = () => {
   useEffect(() => {
@@ -16,8 +17,9 @@ const dashboard = () => {
         image="https://typefinance.com/typefinance-dp.jpg"
         url="https://typefinance.com"
       />
-      <h1 className="text-center text-gray-800 text-2xl">Dashboard</h1>
+
       <div className="">
+        <Header />
         <main>
           <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
             <LinkBox lbTitle="Links" lbNumber="65" lbSvg="url" lbTheme="red" />
