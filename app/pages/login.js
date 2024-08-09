@@ -4,8 +4,10 @@ import Link from "next/link";
 import styles from "../styles/apply.module.css";
 import MyHead from "@/components/MyHead";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +24,7 @@ const Login = () => {
         if (data.status === "success") {
           toast("You are logged in");
           localStorage.setItem("LinkTreeToken", data.token);
+          router.push("/dashboard");
         }
         if (data.status === "not found") {
           toast.error("User not found");
