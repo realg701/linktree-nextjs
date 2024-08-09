@@ -20,28 +20,23 @@ const dashboard = () => {
       <div className="">
         <main>
           <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-            <LinkBox
-              lbTitle="Links"
-              lbNumber="65"
-              lbSvg="nextjs"
-              lbTheme="red"
-            />
+            <LinkBox lbTitle="Links" lbNumber="65" lbSvg="url" lbTheme="red" />
             <LinkBox
               lbTitle="Growth"
               lbNumber="30%"
-              lbSvg="nextjs"
+              lbSvg="growth"
               lbTheme="blue"
             />
             <LinkBox
               lbTitle="Links"
               lbNumber="65"
-              lbSvg="nextjs"
+              lbSvg="loss"
               lbTheme="lime"
             />
             <LinkBox
               lbTitle="Links"
               lbNumber="65"
-              lbSvg="nextjs"
+              lbSvg="link"
               lbTheme="amber"
             />
           </section>
