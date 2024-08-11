@@ -4,7 +4,6 @@ import LinkBox from "@/components/LinkBox";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import { data } from "autoprefixer";
 
 const dashboard = () => {
   const router = useRouter();
@@ -25,6 +24,7 @@ const dashboard = () => {
         setData(data.userData);
         localStorage.setItem("userHandle", data.userData.handle);
         toast.success(data.message);
+        console.log(data.message);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -38,32 +38,36 @@ const dashboard = () => {
       />
 
       <div className="">
-        <Header router={router} />
+        <Header data={data} />
         <main>
-          <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+          <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-5 cursor-default">
             <LinkBox
               lbTitle="Links"
-              lbNumber="13&#x1F517;"
+              lbNumber={data.links}
               lbSvg="url"
               lbTheme="bg-red-500"
+              lbAlt="Links"
             />
             <LinkBox
               lbTitle="Growth"
-              lbNumber="30%&#x1F4C8;"
+              lbNumber="30%"
               lbSvg="growth"
               lbTheme="bg-blue-500"
+              lbAlt="Growth"
             />
             <LinkBox
               lbTitle="Growth Down"
-              lbNumber="3.5%&#x1F4C9;	"
+              lbNumber="3.5%"
               lbSvg="loss"
               lbTheme="bg-lime-500"
+              lbAlt="Growth Down"
             />
             <LinkBox
               lbTitle="Booming Links"
-              lbNumber="65%&#x26D3;&#xFE0F;	"
+              lbNumber="65%"
               lbSvg="link"
               lbTheme="bg-amber-500"
+              lbAlt="Booming Links"
             />
           </section>
           <section></section>

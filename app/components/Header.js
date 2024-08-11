@@ -2,9 +2,10 @@ import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/router";
 
-const Header = () => {
+const Header = ({ data }) => {
   const router = useRouter();
-
+  // console.log(data);
+  const { name, role, avatar, handle, links } = data;
   const handleLogout = () => {
     localStorage.removeItem("LinkTreeToken");
     router.push("/login");
@@ -19,6 +20,7 @@ const Header = () => {
             src={"/svg/edit.svg"}
             width={24}
             height={24}
+            alt="Edit Links"
           />
           Edit Links
         </button>
@@ -28,6 +30,7 @@ const Header = () => {
             src={"/svg/avatar.svg"}
             width={24}
             height={24}
+            alt="Edit Profile"
           />
           Edit Profile
         </button>
@@ -35,26 +38,24 @@ const Header = () => {
       <div className="flex flex-col md:flex-row gap-2 p-3">
         <div className="inline-flex justify-center items-center rounded-md cursor-pointer bg-gray-200 hover:bg-gray-300 py-2 px-5">
           <div className="flex flex-col flex-wrap text-xs text-right mr-2">
-            <span className="font-bold">Mr. Anoob</span>
-            <span className="">Creator Pack</span>
+            <span className="font-bold">{handle || "Mr. AnOob"}</span>
+            <span className="">{role} Pack</span>
           </div>
           <div className="user-img">
-            <img
-              className="w-10 h-10"
-              src="https://cdn-icons-png.flaticon.com/512/4322/4322991.png"
-              alt=""
-            />
+            <img className="w-10 h-10" src={avatar} alt={handle} />
           </div>
         </div>
         <div className="inline-flex justify-end gap-2">
           <img
             className="w-12 h-14 px-3 rounded-md bg-gray-200 hover:bg-gray-300"
             src={"/svg/notify.svg"}
+            alt="Notifications"
           />
           <img
             onClick={handleLogout}
             className="w-12 h-14 px-3 rounded-md bg-gray-200 hover:bg-gray-300"
             src={"/svg/logout.svg"}
+            alt="LogOut"
           />
         </div>
       </div>

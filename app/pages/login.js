@@ -30,9 +30,10 @@ const Login = () => {
           toast.error("User not found");
         }
       })
-      .catch((error) => console.log(error));
-    // setEmail("");
-    // setPassword("");
+      .catch((error) => {
+        toast.error(error.message);
+        console.log(error);
+      });
   };
 
   return (

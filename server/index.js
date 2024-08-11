@@ -4,6 +4,7 @@ import connectToDB from "./db.js";
 import "dotenv/config";
 import { loginUser, registerUser } from "./controllers/auth.js";
 import { dashBoardData } from "./controllers/dashboard.js";
+import { getUserData } from "./controllers/getUserData.js";
 
 const app = express();
 connectToDB();
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 app.post("/api/register", registerUser);
 app.post("/api/login", loginUser);
 app.post("/data/dashboard", dashBoardData);
+app.get("/get/:handle", getUserData);
 
 const port = process.env.PORT || 8080;
 
