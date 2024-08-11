@@ -1,19 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MyHead from "@/components/MyHead";
 import LinkBox from "@/components/LinkBox";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { data } from "autoprefixer";
 
 const dashboard = () => {
   const router = useRouter();
-
+  const [data, setData] = useState({});
   useEffect(() => {
     if (!localStorage.getItem("LinkTreeToken")) return router.push("/login");
 
     fetch("http://localhost:8080/data/dashboard", {
       method: "POST",
       headers: { "content-type": "application/json" },
-    });
+      body: JSON.stringify({
+        tokenMail: localStorage.getItem("LinkTreeToken"),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "error") return toast.error("Error");
+        setData(data.userData);
+        localStorage.setItem("userHandle", data.userData.handle);
+        toast.success(data.message);
+      })
+      .catch((error) => console.log(error));
   }, []);
   return (
     <>

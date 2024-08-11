@@ -3,6 +3,7 @@ import cors from "cors";
 import connectToDB from "./db.js";
 import "dotenv/config";
 import { loginUser, registerUser } from "./controllers/auth.js";
+import { dashBoardData } from "./controllers/dashboard.js";
 
 const app = express();
 connectToDB();
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
 // Routes
 app.post("/api/register", registerUser);
 app.post("/api/login", loginUser);
-app.post("/data/dashboard", dashBoard);
+app.post("/data/dashboard", dashBoardData);
 
 const port = process.env.PORT || 8080;
 
