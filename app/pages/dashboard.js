@@ -2,12 +2,18 @@ import React, { useEffect } from "react";
 import MyHead from "@/components/MyHead";
 import LinkBox from "@/components/LinkBox";
 import Header from "@/components/Header";
+import { useRouter } from "next/router";
 
 const dashboard = () => {
+  const router = useRouter();
+
   useEffect(() => {
-    if (!localStorage.getItem("LinkTreeToken")) {
-      window.location.href = "/login";
-    }
+    if (!localStorage.getItem("LinkTreeToken")) return router.push("/login");
+
+    fetch("http://localhost:8080/data/dashboard", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+    });
   }, []);
   return (
     <>
@@ -19,27 +25,32 @@ const dashboard = () => {
       />
 
       <div className="">
-        <Header />
+        <Header router={router} />
         <main>
           <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-            <LinkBox lbTitle="Links" lbNumber="65" lbSvg="url" lbTheme="red" />
+            <LinkBox
+              lbTitle="Links"
+              lbNumber="13&#x1F517;"
+              lbSvg="url"
+              lbTheme="bg-red-500"
+            />
             <LinkBox
               lbTitle="Growth"
-              lbNumber="30%"
+              lbNumber="30%&#x1F4C8;"
               lbSvg="growth"
-              lbTheme="blue"
+              lbTheme="bg-blue-500"
             />
             <LinkBox
-              lbTitle="Links"
-              lbNumber="65"
+              lbTitle="Growth Down"
+              lbNumber="3.5%&#x1F4C9;	"
               lbSvg="loss"
-              lbTheme="lime"
+              lbTheme="bg-lime-500"
             />
             <LinkBox
-              lbTitle="Links"
-              lbNumber="65"
+              lbTitle="Booming Links"
+              lbNumber="65%&#x26D3;&#xFE0F;	"
               lbSvg="link"
-              lbTheme="amber"
+              lbTheme="bg-amber-500"
             />
           </section>
           <section></section>

@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 // Routes
 app.post("/api/register", registerUser);
 app.post("/api/login", loginUser);
+app.post("/data/dashboard", dashBoard);
 
 const port = process.env.PORT || 8080;
 
