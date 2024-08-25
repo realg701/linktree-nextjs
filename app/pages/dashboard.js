@@ -9,7 +9,7 @@ const dashboard = () => {
   const router = useRouter();
   const [data, setData] = useState({});
   useEffect(() => {
-    if (!localStorage.getItem("LinkTreeToken")) return router.push("/login");
+    if (!localStorage.getItem("LinkTreeToken")) router.push("/");
 
     fetch("http://localhost:8080/data/dashboard", {
       method: "POST",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import Image from "next/image";
@@ -56,6 +56,10 @@ const Apply = () => {
       });
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("LinkTreeToken")) router.push("/dashboard");
+  }, []);
 
   // if (data.user) {
   //   localStorage.setItem("user", JSON.stringify(data.user));

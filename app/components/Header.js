@@ -38,7 +38,9 @@ const Header = ({ data }) => {
       <div className="flex flex-col md:flex-row gap-2 p-3">
         <div className="inline-flex justify-center items-center rounded-md cursor-pointer bg-gray-200 hover:bg-gray-300 py-2 px-5">
           <div className="flex flex-col flex-wrap text-xs text-right mr-2">
-            <span className="font-bold">{handle || "Mr. AnOob"}</span>
+            <span className="font-bold">
+              <a href={`/${handle}`}>{handle || "Mr. AnOob"}</a>
+            </span>
             <span className="">{role} Pack</span>
           </div>
           <div className="user-img">
