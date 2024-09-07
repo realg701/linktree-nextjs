@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const dashboard = () => {
   const router = useRouter();
   const [data, setData] = useState({});
+
   useEffect(() => {
     if (!localStorage.getItem("LinkTreeToken")) router.push("/");
 
@@ -23,7 +24,7 @@ const dashboard = () => {
         if (data.status === "error") return toast.error("Error");
         setData(data.userData);
         localStorage.setItem("userHandle", data.userData.handle);
-        toast.success(data.message);
+        // toast.success(data.message);
         console.log(data.message);
       })
       .catch((error) => console.log(error));
@@ -36,7 +37,6 @@ const dashboard = () => {
         image="https://typefinance.com/typefinance-dp.jpg"
         url="https://typefinance.com"
       />
-
       <div className="">
         <Header data={data} />
         <main>
