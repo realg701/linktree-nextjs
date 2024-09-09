@@ -13,7 +13,6 @@ export default function Home() {
 
       <main className="w-full min-h-screen flex flex-col justify-center items-center">
         <h1 className="text-center">
-          {" "}
           Welcome to <br />
           <span className="text-indigo-600 font-semibold">
             NextJS Featured Template
