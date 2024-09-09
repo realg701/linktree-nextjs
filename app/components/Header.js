@@ -16,58 +16,62 @@ const Header = ({ data }) => {
 
   return (
     <header className="flex flex-row justify-between items-start">
-      <div className="flex flex-col md:flex-row md:gap-2 p-3">
+      <div className="flex flex-row gap-2 p-3">
         <Tooltip
-          className=""
           text={"Edit Links"}
           type="dark"
-          placement="bottom"
+          placement="bottomStart"
           leaveDelay={0}
           hideArrow
         >
-          <button className="inline-flex w-full md:w-auto px-5 py-3 mb-3 border rounded-md border-purple-500 text-purple-500 font-bold hover:text-purple-800 hover:bg-purple-100">
+          <button className="inline-flex w-auto px-3 py-3 mb-3 border rounded-md border-purple-500 text-purple-500 font-bold hover:text-purple-800 hover:bg-purple-100">
             <Image
-              className="mr-2"
               src={"/svg/edit.svg"}
               width={24}
               height={24}
               alt="Edit Links"
             />
-            Edit Links
+            <span className="hidden md:block ml-2">Edit Links</span>
           </button>
         </Tooltip>
         <Tooltip
-          className=""
           text={"Edit Profile"}
           type="dark"
           placement="bottom"
           leaveDelay={0}
           hideArrow
         >
-          <button className="inline-flex w-full md:w-auto px-5 py-3 mb-3 border rounded-md border-red-500 text-red-500 font-bold hover:text-red-800 hover:bg-red-100">
+          <button className="inline-flex w-auto px-3 py-3 mb-3 border rounded-md border-red-500 text-red-500 font-bold hover:text-red-800 hover:bg-red-100">
             <Image
-              className="mr-2"
               src={"/svg/avatar.svg"}
               width={24}
               height={24}
               alt="Edit Profile"
             />
-            Edit Profile
+            <span className="hidden md:block ml-2">Edit Profile</span>
           </button>
         </Tooltip>
       </div>
-      <div className="flex flex-col md:flex-row gap-2 p-3">
-        <div className="inline-flex justify-center items-center rounded-md cursor-pointer bg-gray-200 hover:bg-gray-300 py-2 px-5">
-          <div className="flex flex-col flex-wrap text-xs text-right mr-2">
-            <span className="font-bold">
-              <a href={`/${handle}`}>{handle || "Mr. AnOob"}</a>
-            </span>
-            <span className="">{role} Pack</span>
-          </div>
-          <div className="user-img">
-            <img className="w-10 h-10" src={avatar} alt={handle} />
-          </div>
-        </div>
+      <div className="flex flex-row gap-2 ps-0 p-3">
+        <Tooltip
+          text={"Account"}
+          type="dark"
+          placement="bottom"
+          leaveDelay={0}
+          hideArrow
+        >
+          <a href={`/${handle}`}>
+            <div className="inline-flex items-center w-auto px-3 py-2 mb-3 border rounded-md bg-gray-200 hover:bg-gray-300">
+              <div className="flex flex-col text-xs text-right mr-2">
+                <span className="font-bold">{handle || "Mr. AnOob"}</span>
+                <span className="">{role} Pack</span>
+              </div>
+              <div className="user-img">
+                <img src={avatar} width={32} height={32} alt={handle} />
+              </div>
+            </div>
+          </a>
+        </Tooltip>
         <div className="inline-flex justify-end gap-2">
           <Tooltip
             text={"Notifications"}
@@ -76,11 +80,14 @@ const Header = ({ data }) => {
             leaveDelay={0}
             hideArrow
           >
-            <img
-              className="w-12 h-14 px-3 rounded-md bg-gray-200 hover:bg-gray-300"
-              src={"/svg/notify.svg"}
-              alt="Notifications"
-            />
+            <span className="inline-flex w-auto px-3 py-3 mb-3 border rounded-md bg-gray-200 hover:bg-gray-300">
+              <Image
+                src={"/svg/notify.svg"}
+                width={24}
+                height={24}
+                alt="Notifications"
+              />
+            </span>
           </Tooltip>
           <Tooltip
             text={"LogOut"}
@@ -89,12 +96,15 @@ const Header = ({ data }) => {
             leaveDelay={0}
             hideArrow
           >
-            <img
-              onClick={handleLogout}
-              className="w-12 h-14 px-3 rounded-md bg-gray-200 hover:bg-gray-300"
-              src={"/svg/logout.svg"}
-              alt="LogOut"
-            />
+            <span className="inline-flex w-auto px-3 py-3 mb-3 border rounded-md bg-gray-200 hover:bg-gray-300">
+              <Image
+                onClick={handleLogout}
+                src={"/svg/logout.svg"}
+                width={24}
+                height={24}
+                alt="LogOut"
+              />
+            </span>
           </Tooltip>
         </div>
       </div>
