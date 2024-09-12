@@ -1,9 +1,16 @@
+"use client";
 import React from "react";
 import LinkTreeCard from "./LinkTreeCard";
 import { AnimatePresence, motion } from "framer-motion";
 
 const LinkTree = ({ data }) => {
-  const { name, handle, avatar, bio, links } = data;
+  const { name, avatar, bio, links } = data;
+  const [handle, setHandle] = React.useState("");
+
+  React.useEffect(() => {
+    if (localStorage.getItem("userHandle"))
+      setHandle(localStorage.getItem("userHandle"));
+  }, []);
   return (
     <>
       <section className="relative max-w-3xl md:w-2/3 my-0 mx-auto">
@@ -13,7 +20,7 @@ const LinkTree = ({ data }) => {
           alt="Avatar"
         />
         <h2 className="pt-40 text-center text-lg font-bold">
-          {name || localStorage.getItem("userHandle")}
+          {name || handle}
         </h2>
         <p className="text-center">{bio}</p>
         <div className="p-5">
