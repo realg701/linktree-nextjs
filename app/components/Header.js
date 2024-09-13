@@ -12,30 +12,30 @@ const Header = () => {
     router.push("/login");
   };
 
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData /*setUserData */ } = useContext(UserContext);
   const { role, avatar, handle } = userData;
 
-  useEffect(() => {
-    if (!localStorage.getItem("LinkTreeToken")) router.push("/");
+  // useEffect(() => {
+  //   if (!localStorage.getItem("LinkTreeToken")) router.push("/");
 
-    fetch("http://localhost:8080/data/dashboard", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        tokenMail: localStorage.getItem("LinkTreeToken"),
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "error") return toast.error("Error");
-        setData(data.userData);
-        setUserData(data.userData);
-        localStorage.setItem("userHandle", data.userData.handle);
-        toast.success(data.message);
-        console.log(data.message);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  //   fetch("http://localhost:8080/data/dashboard", {
+  //     method: "POST",
+  //     headers: { "content-type": "application/json" },
+  //     body: JSON.stringify({
+  //       tokenMail: localStorage.getItem("LinkTreeToken"),
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.status === "error") return toast.error("Error");
+  //       setData(data.userData);
+  //       setUserData(data.userData);
+  //       localStorage.setItem("userHandle", data.userData.handle);
+  //       toast.success(data.message);
+  //       console.log(data.message);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   return (
     <header className="flex flex-row justify-between items-start">
