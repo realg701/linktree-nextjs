@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
   {
-    name: { type: String },
-    bio: { type: String },
+    name: { type: String, default: "" },
+    bio: { type: String, default: "" },
     email: { type: String, required: true, unique: true },
     avatar: {
       type: String,
@@ -24,13 +24,13 @@ const userSchema = mongoose.Schema(
       },
     ],
     socialMedia: {
-      facebook: { type: String },
-      twitter: { type: String },
-      instagram: { type: String },
-      youtube: { type: String },
-      tiktok: { type: String },
-      linkedin: { type: String },
-      github: { type: String },
+      facebook: { type: String, default: "" },
+      twitter: { type: String, default: "" },
+      instagram: { type: String, default: "" },
+      youtube: { type: String, default: "" },
+      tiktok: { type: String, default: "" },
+      linkedin: { type: String, default: "" },
+      github: { type: String, default: "" },
     },
   },
   { collection: "user-data-linktree" },
