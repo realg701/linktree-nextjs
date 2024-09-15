@@ -5,6 +5,8 @@ import "dotenv/config";
 import { loginUser, registerUser } from "./controllers/auth.js";
 import { dashBoardData } from "./controllers/dashboard.js";
 import { getUserData } from "./controllers/getUserData.js";
+import { saveSocials } from "./controllers/saveProfile.js";
+import { loadSocials } from "./controllers/loadProfile.js";
 
 const app = express();
 connectToDB();
@@ -23,6 +25,9 @@ app.post("/api/login", loginUser);
 
 app.post("/data/dashboard", dashBoardData);
 app.get("/get/:handle", getUserData);
+
+app.post("/save/socials", saveSocials);
+app.post("/load/socials", loadSocials);
 
 const port = process.env.PORT || 8080;
 
