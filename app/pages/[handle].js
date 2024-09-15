@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Link from "next/link";
@@ -6,9 +6,13 @@ import { Loading } from "@geist-ui/core";
 import LinkTree from "@/components/LinkTree";
 import SocialTree from "@/components/SocialTree";
 import ShareButton from "@/components/ShareButton";
+import UserContext from "@/context/userContext";
+import DashboardButton from "@/components/DashboardButton";
 
 const Handle = () => {
   const router = useRouter();
+  const { userData } = useContext(UserContext);
+
   const [data, setData] = useState({});
   const [userFound, setUserFound] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -29,10 +33,11 @@ const Handle = () => {
         .then((data) => {
           if (data.status === "error") {
             setLoading(false);
-            return toast.error("No user available");
+            return toast.error("User not available");
           }
           if (data.status === "success") {
             setData(data.userData);
+            setSocial(data.socials);
             setUserFound(true);
             setLoading(false);
           }
@@ -42,19 +47,8 @@ const Handle = () => {
   }, [router.query]);
 
   useEffect(() => {
-    if (router.query?.handle) {
-      fetch(`http://localhost:8080/get/socials/${router.query.handle}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status === "error")
-            return toast.error("No socials available");
-          if (data.status === "success") {
-            setSocial(data.socials);
-          }
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [router.query]);
+    if (!userData.handle) router.push("/dashboard");
+  }, []);
 
   return (
     <div>
@@ -67,6 +61,7 @@ const Handle = () => {
           {userFound ? (
             <>
               <ShareButton />
+              <DashboardButton />
               <LinkTree data={data} />
               <SocialTree social={social} />
             </>
