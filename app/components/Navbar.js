@@ -90,7 +90,6 @@ const NavBar = () => {
                 </li>
               ) : (
                 <>
-                  {" "}
                   <li>
                     <Link
                       href="/login"
