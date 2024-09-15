@@ -1,21 +1,19 @@
+import UserContext from "@/context/userContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const NavBar = () => {
   const router = useRouter();
+  const { userData } = useContext(UserContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [handle, setHandle] = useState("");
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
   useEffect(() => {
     setMobileMenuOpen(false);
-    if (localStorage.getItem("LinkTreeToken")) setOpen(true);
-    if (localStorage.getItem("userHandle"))
-      setHandle(localStorage.getItem("userHandle"));
   }, [router.asPath]);
 
   return (
@@ -71,15 +69,17 @@ const NavBar = () => {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link
-                  href={`/${handle}`}
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  {handle.toUpperCase()}
-                </Link>
-              </li>
-              {open ? (
+              {userData.handle && (
+                <li>
+                  <Link
+                    href={`/${userData.handle}`}
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    {userData.handle.toUpperCase()}
+                  </Link>
+                </li>
+              )}
+              {userData.handle ? (
                 <li>
                   <Link
                     href="/dashboard"
@@ -89,14 +89,25 @@ const NavBar = () => {
                   </Link>
                 </li>
               ) : (
-                <li>
-                  <Link
-                    href="/apply"
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                  >
-                    Apply
-                  </Link>
-                </li>
+                <>
+                  {" "}
+                  <li>
+                    <Link
+                      href="/login"
+                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/apply"
+                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    >
+                      SignUp
+                    </Link>
+                  </li>
+                </>
               )}
               <li>
                 <Link
