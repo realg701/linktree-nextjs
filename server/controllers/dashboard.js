@@ -15,7 +15,8 @@ export const dashBoardData = async (req, res) => {
       bio: user.bio,
       avatar: user.avatar,
       handle: user.handle,
-      links: user.links.length,
+      links: user.links,
+      socials: user.socialMedia,
     };
     return res.json({
       message: "User loaded",
