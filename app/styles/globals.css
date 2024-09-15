@@ -49,7 +49,7 @@ a {
   background: #757575; /* Set color of thumb on hover */
 }
 
-img{
+img {
   user-select: none;
   -webkit-user-drag: none;
 }
