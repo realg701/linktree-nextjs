@@ -78,22 +78,24 @@ const SocialTree = ({ social }) => {
                 alt="Facebook"
               />
             </Link>
-            <Link
-              className="rounded-full border border-gray-700 p-1 hover:bg-zinc-300 transition-all duration-500 hover:scale-110"
-              href={`https://tiktok.com/${tiktok}`}
-              target="_blank"
-            >
-              <Image
-                src={"/svg/socials/tiktok.svg"}
-                width={28}
-                height={28}
-                alt="Facebook"
-              />
-            </Link>
+            {tiktok && (
+              <Link
+                className="rounded-full border border-gray-700 p-1 hover:bg-zinc-300 transition-all duration-500 hover:scale-110"
+                href={`https://tiktok.com/${tiktok}`}
+                target="_blank"
+              >
+                <Image
+                  src={"/svg/socials/tiktok.svg"}
+                  width={28}
+                  height={28}
+                  alt="Facebook"
+                />
+              </Link>
+            )}
             {linkedin && (
               <Link
                 className="rounded-full border border-gray-700 p-1 hover:bg-zinc-300 transition-all duration-500 hover:scale-110"
-                href={`https://linkedin.com/${linkedin}`}
+                href={`https://linkedin.com/in/${linkedin}`}
                 target="_blank"
               >
                 <Image
