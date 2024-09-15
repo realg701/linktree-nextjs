@@ -1,7 +1,13 @@
 import Link from "next/link";
 import MyHead from "../components/MyHead";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [open, setOpen] = useState("Apply");
+
+  useEffect(() => {
+    if (localStorage.getItem("LinkTreeToken")) setOpen("Dashboard");
+  }, []);
   return (
     <>
       <MyHead
@@ -11,19 +17,19 @@ export default function Home() {
         url="https://typefinance.com"
       />
 
-      <main className="w-full min-h-screen flex flex-col justify-center items-center">
+      <main className="flex flex-col justify-center items-center min-h-dvh -mt-16">
         <h1 className="text-center">
           Welcome to <br />
           <span className="text-indigo-600 font-semibold">
-            NextJS Featured Template
+            NextJS Featured LinkTree
           </span>
         </h1>
         <Link
           title="Notice the page loader"
           className="bg-indigo-600 rounded-sm inline-block my-2 p-1 px-2 text-white"
-          href="/apply"
+          href={`/${open.toLowerCase()}`}
         >
-          Link to a page
+          {open}
         </Link>
       </main>
     </>
