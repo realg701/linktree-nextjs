@@ -1,22 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { Loading } from "@geist-ui/core";
+import MyHead from "@/components/MyHead";
+import Loader from "@/components/Loader";
 import LinkTree from "@/components/LinkTree";
 import SocialTree from "@/components/SocialTree";
 import ShareButton from "@/components/ShareButton";
-import UserContext from "@/context/userContext";
 import DashboardButton from "@/components/DashboardButton";
 
 const Handle = () => {
   const router = useRouter();
-  const { userData } = useContext(UserContext);
-
   const [data, setData] = useState({});
   const [userFound, setUserFound] = useState(false);
   const [loading, setLoading] = useState(true);
-
   const [social, setSocial] = useState({
     facebook: "",
     twitter: "",
@@ -26,6 +23,7 @@ const Handle = () => {
     linkedin: "",
     github: "",
   });
+
   useEffect(() => {
     if (router.query?.handle) {
       fetch(`http://localhost:8080/get/${router.query.handle}`)
@@ -46,23 +44,23 @@ const Handle = () => {
     }
   }, [router.query]);
 
-  useEffect(() => {
-    if (!userData.handle) router.push("/dashboard");
-  }, []);
-
   return (
-    <div>
+    <>
+      <MyHead
+        title={router.query.handle || "Loading..."}
+        description="Welcome to LinkTree, where we you keep all your links in one place"
+        image="https://typefinance.com/typefinance-dp.jpg"
+        url="https://typefinance.com"
+      />
       {loading ? (
-        <>
-          <Loading />
-        </>
+        <Loader loaderState="Loading..." />
       ) : (
         <>
           {userFound ? (
             <>
               <ShareButton />
               <DashboardButton />
-              <LinkTree data={data} />
+              <LinkTree data={data} handle={router.query.handle} />
               <SocialTree social={social} />
             </>
           ) : (
@@ -97,7 +95,7 @@ const Handle = () => {
           )}
         </>
       )}
-    </div>
+    </>
   );
 };
 
