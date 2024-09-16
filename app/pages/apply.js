@@ -23,13 +23,10 @@ const Apply = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
     if (!category) return toast.error("Select category");
     setLoading(true);
-
+    // Send userData to backend
     const userData = { handle, email, password, category };
-
-    // Backend api call
     fetch("http://localhost:8080/api/register", {
       method: "POST",
       headers: {
@@ -44,28 +41,24 @@ const Apply = () => {
           toast("Registered successfully");
           localStorage.setItem("LinkTreeToken", data.token);
           setSubmitted(true);
+          setLoading(false);
           router.push("/login");
         }
         if (data.status === "error") {
           toast.error("Try a different username or email");
+          setLoading(false);
         }
       })
       .catch((err) => {
         toast.error("Try a different username or email");
         console.log(err);
+        setLoading(false);
       });
-    setLoading(false);
   };
 
   useEffect(() => {
     if (localStorage.getItem("LinkTreeToken")) router.push("/dashboard");
   }, []);
-
-  // if (data.user) {
-  //   localStorage.setItem("user", JSON.stringify(data.user));
-  //
-  // }
-  // toast("You are registered");
 
   return (
     <>
@@ -76,9 +69,7 @@ const Apply = () => {
         url="https://typefinance.com"
       />
       <section
-        className={
-          styles.background + " min-h-screen flex justify-center items-center"
-        }
+        className={styles.background + " flex justify-center items-center"}
       >
         <div className="main">
           <div className="content bg-white px-4 py-5 rounded-2xl shadow-lg border-2">
