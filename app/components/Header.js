@@ -13,11 +13,30 @@ const Header = () => {
     localStorage.removeItem("userHandle");
     localStorage.removeItem("ally-supports-cache");
     setUserData({});
-    router.push("/login");
+    return (window.location.href = "/login");
   };
 
   const { userData, setUserData } = useContext(UserContext);
   const { role, avatar, handle } = userData;
+
+  useEffect(() => {
+    if (!localStorage.getItem("LinkTreeToken"))
+      return (window.location.href = "/login");
+    fetch("http://localhost:8080/data/dashboard", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        tokenMail: localStorage.getItem("LinkTreeToken"),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "error") return toast.error("Error");
+        setUserData(data.userData);
+        localStorage.setItem("userHandle", data.userData.handle);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <header className="flex flex-row justify-between items-start">
@@ -77,7 +96,7 @@ const Header = () => {
                 <span className="font-bold">{handle || "Mr. AnOob"}</span>
                 <span className="">{role} Pack</span>
               </div>
-              <div className="user-img">
+              <div className="user-img rounded-full overflow-hidden">
                 <img src={avatar} width={32} height={32} alt={handle} />
               </div>
             </div>
