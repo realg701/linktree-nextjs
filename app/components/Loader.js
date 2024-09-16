@@ -1,7 +1,7 @@
-const Loader = ({ loaderState }) => {
+const Loader = ({ loaderState, loaderMargin }) => {
   return (
-    <div className="flex justify-center items-center h-96">
-      <div id="wifi-loader">
+    <div className="flex justify-center items-center">
+      <div id="wifi-loader" style={{ marginTop: loaderMargin }}>
         <svg className="circle-outer" viewBox="0 0 86 86">
           <circle className="back" cx="43" cy="43" r="40"></circle>
           <circle className="front" cx="43" cy="43" r="40"></circle>
