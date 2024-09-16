@@ -6,7 +6,13 @@ import { useContext, useEffect, useState } from "react";
 const NavBar = () => {
   const router = useRouter();
   const { userData } = useContext(UserContext);
+  const [open, setOpen] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("LinkTreeToken"))
+      setOpen(localStorage.getItem("userHandle"));
+  }, []);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -69,45 +75,24 @@ const NavBar = () => {
                   Home
                 </Link>
               </li>
-              {userData.handle && (
-                <li>
-                  <Link
-                    href={`/${userData.handle}`}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                  >
-                    {userData.handle.toUpperCase()}
-                  </Link>
-                </li>
-              )}
-              {userData.handle ? (
-                <li>
-                  <Link
-                    href="/dashboard"
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-              ) : (
-                <>
-                  <li>
-                    <Link
-                      href="/login"
-                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    >
-                      Login
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/apply"
-                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    >
-                      SignUp
-                    </Link>
-                  </li>
-                </>
-              )}
+              <li>
+                <Link
+                  href={`/${
+                    userData.handle || open ? userData.handle || open : "login"
+                  }`}
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                  {userData.handle || open ? userData.handle || open : "Login"}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${userData.handle || open ? "dashboard" : "apply"}`}
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                  {userData.handle || open ? "Dashboard" : "SignUp"}
+                </Link>
+              </li>
               <li>
                 <Link
                   href="#"
