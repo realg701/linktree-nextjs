@@ -1,17 +1,8 @@
 import { Tooltip } from "@geist-ui/core";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 
 const DashboardButton = () => {
-  const router = useRouter();
-  const copyLink = () => {
-    const link = `https://linktree.com/${router.query.handle}`;
-    navigator.clipboard.writeText(link);
-    toast("Copied to clipboard");
-  };
-
   return (
     <>
       <Link
@@ -29,7 +20,8 @@ const DashboardButton = () => {
             src={"/svg/dashboard.svg"}
             width={40}
             height={40}
-            alt="share"
+            alt="dashboard"
+            style={{ padding: 2 }}
           />
         </Tooltip>
       </Link>
