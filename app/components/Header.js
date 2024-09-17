@@ -22,7 +22,7 @@ const Header = () => {
     if (!localStorage.getItem("LinkTreeToken"))
       return (window.location.href = "/login");
     setLoading(true);
-    fetch("http://localhost:8080/data/dashboard", {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}data/dashboard`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -105,7 +105,7 @@ const Header = () => {
               <Link href={`/${handle}`}>
                 <div className="inline-flex items-center w-auto px-3 py-2 mb-3 border rounded-md bg-gray-200 hover:bg-gray-300">
                   <div className="flex flex-col text-xs text-right mr-2">
-                    <span className="font-bold">{handle || "Mr. AnOob"}</span>
+                    <span className="font-bold">@{handle}</span>
                     <span className="">{role} Pack</span>
                   </div>
                   <div className="user-img rounded-full overflow-hidden">
