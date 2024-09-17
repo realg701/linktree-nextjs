@@ -26,7 +26,12 @@ const Handle = () => {
   console.log(process.env.NEXT_PUBLIC_BASE_URL);
   useEffect(() => {
     if (router.query?.handle) {
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}get/${router.query.handle}`)
+      fetch(
+        `${
+          process.env.NEXT_PUBLIC_BASE_URL ||
+          "https://linktree-nextjs-server.vercel.app/"
+        }get/${router.query.handle}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.status === "error") {
