@@ -4,7 +4,7 @@ export const getUserData = async (req, res) => {
   const handle = req.params.handle;
   try {
     const user = await User.findOne({ handle: handle });
-    console.log(user);
+
     const userData = {
       name: user.name,
       bio: user.bio,
@@ -12,6 +12,7 @@ export const getUserData = async (req, res) => {
       links: user.links,
     };
     const socials = user.socialMedia;
+
     return res.json({
       message: "found",
       userData,
