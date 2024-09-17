@@ -23,10 +23,10 @@ const Handle = () => {
     linkedin: "",
     github: "",
   });
-
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
   useEffect(() => {
     if (router.query?.handle) {
-      fetch(`http://localhost:8080/get/${router.query.handle}`)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}get/${router.query.handle}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.status === "error") {
