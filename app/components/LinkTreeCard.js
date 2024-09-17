@@ -15,7 +15,11 @@ const LinkTreeCard = ({ link }) => {
         >
           <Image
             className="bg-white rounded-full p-1 mr-5"
-            src={icon || `/svg/socials/${title}.svg` || "/svg/no-image.svg"}
+            src={
+              icon ||
+              `/svg/socials/${title.toLowerCase()}.svg` ||
+              "/svg/no-image.svg"
+            }
             width={50}
             height={50}
             alt={title}
