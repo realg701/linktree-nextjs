@@ -22,7 +22,7 @@ const LinkTree = ({ data, handle }) => {
             @{handle}
           </h2>
         )}
-        <p className="text-center">{bio}</p>
+        <p className="text-center px-2">{bio}</p>
         <div className="p-5">
           <AnimatePresence>
             {links.map((link, index) => (
