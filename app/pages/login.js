@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+import React, { use, useContext, useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import { toast } from "react-toastify";
 import styles from "../styles/apply.module.css";
 import MyHead from "@/components/MyHead";
-import Image from "next/image";
-import { useRouter } from "next/router";
 
 const Login = () => {
   const router = useRouter();
@@ -13,12 +13,17 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Backend Call
-    fetch("http://localhost:8080/api/login", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    })
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        "https://linktree-nextjs-server.vercel.app/"
+      }api/login`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
@@ -36,6 +41,10 @@ const Login = () => {
       });
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("LinkTreeToken")) router.push("/dashboard");
+  }, []);
+
   return (
     <>
       <MyHead
@@ -45,9 +54,7 @@ const Login = () => {
         url="https://typefinance.com"
       />
       <section
-        className={
-          styles.background + " min-h-screen flex justify-center items-center"
-        }
+        className={styles.background + " flex justify-center items-center"}
       >
         <div className="main">
           <div className="content bg-white px-4 py-5 rounded-2xl shadow-lg border-2">
