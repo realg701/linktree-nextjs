@@ -54,10 +54,10 @@ const Handle = () => {
   return (
     <>
       <MyHead
-        title={router.query.handle || "Loading..."}
+        title={data.name || data.handle}
         description="Welcome to LinkTree, where we you keep all your links in one place"
-        image="https://typefinance.com/typefinance-dp.jpg"
-        url="https://typefinance.com"
+        image={userData.avatar}
+        url={`https://linktree-nextjs-pi.vercel.app/${data.handle}`}
       />
       {loading ? (
         <Loader loaderState="Loading..." />
@@ -78,10 +78,10 @@ const Handle = () => {
                   src="/svg/avatar.svg"
                   alt=""
                 />
-                <h2 className="pt-40 text-lg font-bold">
+                <h2 className="pt-40 pb-2 text-lg font-bold">
                   Sorry, this page or user isn't available.
                 </h2>
-                <p>
+                <p className="px-2">
                   The link you followed may be broken, or the page may have been
                   removed. Go back to{" "}
                   <Link
