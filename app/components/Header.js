@@ -16,7 +16,7 @@ const Header = () => {
   };
 
   const { userData, setUserData } = React.useContext(UserContext);
-  const { role, avatar, handle } = userData;
+  const { name, role, avatar, handle } = userData;
 
   React.useEffect(() => {
     if (!localStorage.getItem("LinkTreeToken"))
@@ -111,8 +111,8 @@ const Header = () => {
               <Link href={`/${handle}`}>
                 <div className="inline-flex items-center w-auto px-3 py-2 mb-3 border rounded-md bg-gray-200 hover:bg-gray-300">
                   <div className="flex flex-col text-xs text-right mr-2">
-                    <span className="font-bold">@{handle}</span>
-                    <span className="">{role} Pack</span>
+                    <span className="font-bold">{name || "@" + handle}</span>
+                    <span>{role} Pack</span>
                   </div>
                   <div className="user-img rounded-full overflow-hidden">
                     <img src={avatar} width={32} height={32} alt={handle} />
