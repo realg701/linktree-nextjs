@@ -92,7 +92,9 @@ const Links = () => {
                     key={index}
                   >
                     <Image
-                      src={`/svg/socials/${link?.title || "image"}.svg`}
+                      src={`/svg/socials/${
+                        link?.title.toLowerCase() || "image"
+                      }.svg`}
                       alt={link.title}
                       width={24}
                       height={24}
