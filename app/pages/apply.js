@@ -27,13 +27,19 @@ const Apply = () => {
     setLoading(true);
     // Send userData to backend
     const userData = { handle, email, password, category };
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/register`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        "https://linktree-nextjs-server.vercel.app/"
+      }api/register`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log("Apply:", data);
