@@ -37,36 +37,49 @@ const Profile = () => {
   const saveProfile = (e) => {
     setSavingProfile(true);
     e.preventDefault();
-    fetch("http://localhost:8080/save/profile", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        tokenMail: localStorage.getItem("LinkTreeToken"),
-        name: name,
-        bio: bio,
-        avatar: avatar,
-      }),
-    })
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        "https://linktree-nextjs-server.vercel.app/"
+      }save/profile`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          tokenMail: localStorage.getItem("LinkTreeToken"),
+          name: name,
+          bio: bio,
+          avatar: avatar,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "error") return toast.error(data.error);
         setSavingProfile(false);
         toast.success("Profile saved");
-      });
+      })
+      .catch((error) => toast.error(error.message));
   };
 
   // Saving socials data to backend
   const saveSocials = (e) => {
     setSavingSocials(true);
     e.preventDefault();
-    fetch("http://localhost:8080/save/socials", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        tokenMail: localStorage.getItem("LinkTreeToken"),
-        socials: social,
-      }),
-    })
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        "https://linktree-nextjs-server.vercel.app/"
+      }save/socials`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          tokenMail: localStorage.getItem("LinkTreeToken"),
+          socials: social,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "error") return toast.error(data.error);
