@@ -1,11 +1,11 @@
+import React from "react";
 import Link from "next/link";
-import MyHead from "../components/MyHead";
-import { useEffect, useState } from "react";
+import MyHead from "@/components/MyHead";
 
 export default function Home() {
-  const [open, setOpen] = useState("Apply");
+  const [open, setOpen] = React.useState("Apply");
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (localStorage.getItem("LinkTreeToken")) setOpen("Dashboard");
   }, []);
   return (
@@ -26,7 +26,7 @@ export default function Home() {
         </h1>
         <Link
           title="Notice the page loader"
-          className="bg-indigo-600 rounded-sm inline-block my-2 p-1 px-2 text-white"
+          className="inline-block my-2 p-2 px-4 font-medium rounded-md bg-indigo-600 text-white"
           href={`/${open.toLowerCase()}`}
         >
           {open}
