@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Link from "next/link";
@@ -8,13 +8,15 @@ import LinkTree from "@/components/LinkTree";
 import SocialTree from "@/components/SocialTree";
 import ShareButton from "@/components/ShareButton";
 import DashboardButton from "@/components/DashboardButton";
+import UserContext from "@/context/userContext";
 
 const Handle = () => {
   const router = useRouter();
-  const [data, setData] = useState({});
-  const [userFound, setUserFound] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [social, setSocial] = useState({
+  const { userData } = React.useContext(UserContext);
+  const [data, setData] = React.useState({});
+  const [userFound, setUserFound] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [social, setSocial] = React.useState({
     facebook: "",
     twitter: "",
     instagram: "",
@@ -23,8 +25,8 @@ const Handle = () => {
     linkedin: "",
     github: "",
   });
-  console.log(process.env.NEXT_PUBLIC_BASE_URL);
-  useEffect(() => {
+
+  React.useEffect(() => {
     if (router.query?.handle) {
       fetch(
         `${
@@ -64,7 +66,7 @@ const Handle = () => {
           {userFound ? (
             <>
               <ShareButton />
-              <DashboardButton />
+              {userData.handle && <DashboardButton />}
               <LinkTree data={data} handle={router.query.handle} />
               <SocialTree social={social} />
             </>
