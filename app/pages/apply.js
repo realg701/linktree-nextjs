@@ -27,7 +27,7 @@ const Apply = () => {
     setLoading(true);
     // Send userData to backend
     const userData = { handle, email, password, category };
-    fetch("http://localhost:8080/api/register", {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/register`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
