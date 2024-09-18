@@ -22,13 +22,19 @@ const Header = () => {
     if (!localStorage.getItem("LinkTreeToken"))
       return (window.location.href = "/login");
     setLoading(true);
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}data/dashboard`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        tokenMail: localStorage.getItem("LinkTreeToken"),
-      }),
-    })
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        "https://linktree-nextjs-server.vercel.app/"
+      }data/dashboard`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          tokenMail: localStorage.getItem("LinkTreeToken"),
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "error") return toast.error("Error");
